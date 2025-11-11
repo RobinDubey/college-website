@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes marquee {0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+    .animate-marquee{display:inline-block;white-space:nowrap;animation:marquee 18s linear infinite;}
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-indigo-600 rounded-md flex items-center justify-center text-white font-bold">CI</div>
+          <div>
+            <h1 class="font-semibold">College of Innovation</h1>
+            <p class="text-xs text-gray-500">Excellence • Research • Community</p>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="#home" class="hover:text-indigo-600">Home</a>
+          <a href="#departments" class="hover:text-indigo-600">Departments</a>
+          <a href="#events" class="hover:text-indigo-600">Events</a>
+          <a href="#faculty" class="hover:text-indigo-600">Faculty</a>
+          <a href="#contact" class="hover:text-indigo-600">Contact</a>
+          <button onclick="openModal()" class="ml-2 px-3 py-1 bg-indigo-600 text-white rounded-md">Admissions</button>
+        </nav>
+        <button class="md:hidden p-2" onclick="toggleMenu()" aria-label="Toggle menu">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+      <div class="px-4 py-3 space-y-2">
+        <a href="#home" class="block">Home</a>
+        <a href="#departments" class="block">Departments</a>
+        <a href="#events" class="block">Events</a>
+        <a href="#faculty" class="block">Faculty</a>
+        <a href="#contact" class="block">Contact</a>
+        <button onclick="openModal(); toggleMenu();" class="w-full mt-2 px-3 py-2 bg-indigo-600 text-white rounded-md">Admissions</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="pt-12 max-w-7xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-4xl font-extrabold">Welcome to College of Innovation</h2>
+        <p class="mt-4 text-gray-600">Where ideas become impact. Cutting-edge labs, collaborations, and vibrant campus life.</p>
+        <div class="mt-6 flex gap-3">
+          <button onclick="openModal()" class="px-5 py-2 bg-indigo-600 text-white rounded shadow">Apply Now</button>
+          <a href="#departments" class="px-5 py-2 border rounded-md">Explore Departments</a>
+        </div>
+      </div>
+      <div class="bg-gradient-to-tr from-indigo-600 to-sky-500 text-white p-6 rounded-xl shadow-lg">
+        <h3 class="font-bold text-xl">Open Day: Dec 1, 2025</h3>
+        <ul class="mt-4 text-sm list-disc ml-6">
+          <li>AI Lab Demo</li>
+          <li>Startup Expo</li>
+          <li>Scholarships Counselling</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- News Ticker -->
+    <div class="mt-8 bg-white border rounded p-3 overflow-hidden">
+      <span class="font-semibold text-indigo-600">Latest:</span>
+      <span class="animate-marquee">Admissions open • New AI Lab • Students win National Hackathon</span>
+    </div>
+  </section>
+
+  <!-- Departments -->
+  <section id="departments" class="mt-12 max-w-7xl mx-auto px-4">
+    <h3 class="text-2xl font-semibold">Departments</h3>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+      <div class="p-5 bg-white shadow rounded">Computer Science</div>
+      <div class="p-5 bg-white shadow rounded">Mechanical Engineering</div>
+      <div class="p-5 bg-white shadow rounded">Electronics</div>
+      <div class="p-5 bg-white shadow rounded">Management Studies</div>
+    </div>
+  </section>
+
+  <!-- Events Slider -->
+  <section id="events" class="mt-12 max-w-7xl mx-auto px-4">
+    <h3 class="text-2xl font-semibold">Upcoming Events</h3>
+    <div class="relative bg-white mt-4 p-6 rounded shadow" id="eventBox"></div>
+    <div class="flex justify-end mt-2 gap-2">
+      <button onclick="prevEvent()" class="px-3 py-1 border rounded">Prev</button>
+      <button onclick="nextEvent()" class="px-3 py-1 border rounded">Next</button>
+    </div>
+  </section>
+
+  <!-- Faculty Slider -->
+  <section id="faculty" class="mt-12 max-w-7xl mx-auto px-4">
+    <h3 class="text-2xl font-semibold">Featured Faculty</h3>
+    <div class="bg-white mt-4 p-6 rounded shadow" id="facultyBox"></div>
+    <div class="flex justify-end mt-2 gap-2">
+      <button onclick="prevFaculty()" class="px-3 py-1 border rounded">Prev</button>
+      <button onclick="nextFaculty()" class="px-3 py-1 border rounded">Next</button>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="mt-12 max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6">
+    <div class="md:col-span-2 bg-white p-6 rounded shadow">
+      <h3 class="text-xl font-semibold">Contact Us</h3>
+      <form class="mt-4 space-y-3">
+        <input class="border w-full p-2 rounded" placeholder="Your Name" />
+        <input class="border w-full p-2 rounded" placeholder="Email" />
+        <textarea class="border w-full p-2 rounded" rows="4" placeholder="Message"></textarea>
+        <button class="px-4 py-2 bg-indigo-600 text-white rounded">Send Message</button>
+      </form>
+    </div>
+    <div class="bg-white p-6 rounded shadow">
+      <h4 class="font-semibold">Quick Links</h4>
+      <ul class="text-sm mt-3 space-y-2">
+        <li><a href="#" class="text-indigo-600">Academic Calendar</a></li>
+        <li><a href="#" class="text-indigo-600">Placements</a></li>
+        <li><a href="#" class="text-indigo-600">Scholarships</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-12 text-center text-sm text-gray-600 py-6 border-t">
+    © <span id="year"></span> College of Innovation
+  </footer>
+
+  <!-- Modal -->
+  <div id="admissionModal" class="fixed inset-0 bg-black/50 items-center justify-center hidden">
+    <div class="bg-white p-6 rounded shadow max-w-md w-full mx-4">
+      <h3 class="text-lg font-semibold">Admissions Enquiry</h3>
+      <form class="mt-4 space-y-3">
+        <input class="border w-full p-2 rounded" placeholder="Full Name" />
+        <input class="border w-full p-2 rounded" placeholder="Email" />
+        <select class="border w-full p-2 rounded">
+          <option>Computer Science</option>
+          <option>Mechanical</option>
+          <option>Electronics</option>
+          <option>Management</option>
+        </select>
+        <button class="px-4 py-2 bg-indigo-600 text-white rounded w-full">Submit</button>
+      </form>
+      <button onclick="closeModal()" class="block w-full mt-3 text-sm text-gray-500">Cancel</button>
+    </div>
+  </div>
+
+<script>
+const events=[
+ {title:"Tech Fest 2025",date:"Dec 12, 2025",desc:"Coding and robotics competitions."},
+ {title:"Cultural Night",date:"Jan 8, 2026",desc:"Music, dance and drama performances."},
+ {title:"Sports Meet",date:"Feb 21, 2026",desc:"Annual athletic meet."}
+];
+let eventIndex=0;
+function renderEvent(){document.getElementById("eventBox").innerHTML=`<h4 class='text-lg font-bold'>${events[eventIndex].title}</h4><div class='text-sm text-gray-500'>${events[eventIndex].date}</div><p class='mt-2 text-gray-600'>${events[eventIndex].desc}</p>`;}
+function nextEvent(){eventIndex=(eventIndex+1)%events.length;renderEvent();}
+function prevEvent(){eventIndex=(eventIndex-1+events.length)%events.length;renderEvent();}
+renderEvent(); setInterval(nextEvent,4000);
+
+const faculty=[
+ {name:"Dr. Shrushti",dept:"Computer Science",email:"anjali@college.edu"},
+ {name:"Prof. Rohit Singh",dept:"Mechanical",email:"rohit@college.edu"},
+ {name:"Dr. Meera Patel",dept:"Electronics",email:"meera@college.edu"}
+];
+let facultyIndex=0;
+function renderFaculty(){document.getElementById("facultyBox").innerHTML=`<h4 class='font-semibold text-lg'>${faculty[facultyIndex].name}</h4><div class='text-sm text-gray-500'>${faculty[facultyIndex].dept}</div><a class='text-indigo-600 text-sm' href='mailto:${faculty[facultyIndex].email}'>${faculty[facultyIndex].email}</a>`;}
+function nextFaculty(){facultyIndex=(facultyIndex+1)%faculty.length;renderFaculty();}
+function prevFaculty(){facultyIndex=(facultyIndex-1+faculty.length)%faculty.length;renderFaculty();}
+renderFaculty();
+
+function toggleMenu(){document.getElementById("mobileMenu").classList.toggle("hidden");}
+function openModal(){document.getElementById("admissionModal").classList.remove("hidden");document.body.style.overflow="hidden";}
+function closeModal(){document.getElementById("admissionModal").classList.add("hidden");document.body.style.overflow="auto";}
+
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+
+</body></html>
